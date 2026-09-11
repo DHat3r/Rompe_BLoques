@@ -33,7 +33,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
         timer.start();
 
     }
-    public void print(Graphics g){
+    public void paint(Graphics g){
         g.setColor(Color.white);
         g.fillRect(1, 1, 692, 592);
 
@@ -47,6 +47,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
 
         g.setColor(Color.green);
         g.fillOval(ballposX, ballposY, 20, 20);
+        g.dispose();
 
 
     }
@@ -54,6 +55,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
+        timer.start();
+        repaint();
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
@@ -74,10 +77,19 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
                 moveLeft();
             }
         }
- 
 
         throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
     }
+    public void moveRight(){
+    play = true;
+    playerX += 20;
+    }
+
+    private void moveLeft(){
+        play = true;
+        playerX -= 20;
+    }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -91,14 +103,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
         throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
 
-    private void moveRight(){
-        play = true;
-        playerX += 20;
-    }
 
-    private void moveLeft(){
-        play = true;
-        playerX -= 20;
-    }
 
 }
