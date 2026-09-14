@@ -34,31 +34,32 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
         timer.start();
 
     }
-    public void paint(Graphics g){
-        g.setColor(Color.white);
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.setColor(Color.WHITE);
         g.fillRect(1, 1, 692, 592);
 
-        g.setColor(Color.yellow);
+        g.setColor(Color.YELLOW);
         g.fillRect(0, 0, 3, 592);
         g.fillRect(0, 0, 692, 3);
         g.fillRect(692, 0, 3, 592);
-        
-        g.setColor(Color.blue);
+
+        g.setColor(Color.BLUE);
         g.fillRect(playerX, 550, 100, 8);
 
-        g.setColor(Color.green);
+        g.setColor(Color.GREEN);
         g.fillOval(ballposX, ballposY, 20, 20);
-        g.dispose();
-
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        timer.start();
         if(play){
-            if(new Rectangle(ballposX, ballposY,20,30).intersects(new Rectangle(playerX, 550, 100, 8))){
+            Rectangle ball = new Rectangle(ballposX, ballposY, 20, 20);
+            Rectangle player = new Rectangle(playerX, 550, 100, 8);
+
+            if (ball.intersects(player)) {
                 ballYdir = -ballYdir;
             }
             
