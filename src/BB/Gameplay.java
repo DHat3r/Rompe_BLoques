@@ -2,6 +2,7 @@ package BB;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -40,7 +41,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
         g.setColor(Color.yellow);
         g.fillRect(0, 0, 3, 592);
         g.fillRect(0, 0, 692, 3);
-        g.fillRect(691, 0, 3, 592);
+        g.fillRect(692, 0, 3, 592);
         
         g.setColor(Color.blue);
         g.fillRect(playerX, 550, 100, 8);
@@ -56,8 +57,25 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         timer.start();
+        if(play){
+            if(new Rectangle(ballposX, ballposY,20,30).intersects(new Rectangle(playerX, 550, 100, 8))){
+                ballYdir = -ballYdir;
+            }
+            
+            ballposX += ballXdir;
+            ballposY += ballYdir;
+            if(ballposX < 0){
+                ballXdir = -ballXdir;
+            }
+            if(ballposX > 670){
+                ballXdir = -ballXdir;
+            }
+            if(ballposY < 0){
+                ballYdir = -ballYdir;
+            }
+        }
         repaint();
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+
     }
 
     @Override
@@ -77,8 +95,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
                 moveLeft();
             }
         }
-
-        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
     }
     public void moveRight(){
     play = true;
@@ -94,13 +110,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
     @Override
     public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
 
 
